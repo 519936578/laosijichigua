@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>查询 {$site_info.site_name|default=''}</title>
+		<meta name="keywords" content="{$site_info.site_seo_keywords|default=''}" />
+		<meta name="description" content="{$site_info.site_seo_description|default=''}">
+		<include file="public@head" />
+		<link href="__TMPL__/public/assets/css/slippry/slippry.css" rel="stylesheet">
+		<hook name="before_head_end" />
+	</head>
+
+	<body style="height: 100%;">
+		<include file="public@nav" />
+		<div style="margin-top: 150px;">
+			<h1 style="text-align: center;">查询</h1>
+			<div class="form-group" style="    margin-top: 50px;">
+				<div class="col-lg-4 control-label"></div>
+				<div class="col-lg-4">
+					<div class="input-group">
+						<input type="text" class="form-control" aria-label="..." name="name" id="name">
+						<div class="input-group-btn">
+							<button style="border-radius: 0px;" id="title" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span id="text">微信公众号</span> <span class="caret"></span></button>
+							<ul class="dropdown-menu dropdown-menu-right" id="xuan">
+								<li>
+									<a href="#">微信公众号</a>
+								</li>
+								<li>
+									<a href="#">微信小程序</a>
+								</li>
+								<li>
+									<a href="#">网站</a>
+								</li>
+							</ul>
+							<button class="btn btn-default js-ajax-submit" type="button" id="chaxun">查询</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 control-label"></div>
+				<div style="clear: both"></div>
+			</div>
+		</div>
+		<div style="margin-top: 50px;">
+			<div class="form-group">
+				<div class="col-lg-4 control-label"></div>
+				<div class="col-lg-4 control-label" id="data">
+				</div>
+				<div class="col-lg-4 control-label"></div>
+				<div style="clear: both"></div>
+			</div>
+		</div>
+		<include file="public@scripts" />
+		<script src="__TMPL__/public/assets/js/slippry.min.js"></script>
+		<script src="__TMPL__/public/assets/layui.js"></script>
+		<hook name="before_body_end" />
+		<script type="text/javascript">
+			$("#xuan li a").click(function() {
+				$("#text").text($(this).text());
+			})
+			$("#chaxun").click(function() {
+				$name = $("#name").val();
+				$text = $("#text").text();
+				$.ajax({
+					type: "post",
+					url: "{:url('select/index/select')}",
+					async: true,
+					dataType: "json",
+					data: {
+						name: $name,
+						text: $text,
+					},
+					success: function(data) {
+						$("#data").empty();
+						if(data.msg!=="404"){
+							$d=data.msg;
+							console.log($d);
+							$data="<table class='table table-bordered' style='text-align: center;'><tr><td class='active'>名称</td><td class='success'>到期时间</td><td class='warning'>操作</td></tr>";
+							for(var i=0;i<$d.length;i++){
+								$data+="<tr><th class='active' style='text-align: center;line-height: 40px;'><a href='"+$d[i].bianji+"'>"+$d[i].name+"</a></th><th class='success' style='text-align: center;line-height: 40px;'>"+$d[i].time+"</th><th class='warning' style='text-align: center;line-height: 40px;'><a href='"+$d[i].bianji+"'>编辑</a></th></tr>";
+							}
+							$data+="</table>";
+							$("#data").append($data);
+						}else{
+							layui.use(['layer', 'form'], function(){
+								 var layer = layui.layer
+								 layer.msg('无数据', {icon: 5});
+							});
+						}
+					},
+					error: function(data) {
+
+					}
+
+				});
+
+			})
+		</script>
+	</body>
+
+</html>

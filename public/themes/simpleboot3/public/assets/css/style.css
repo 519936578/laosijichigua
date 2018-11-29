@@ -1,7 +1,10 @@
 @CHARSET "UTF-8";
+html{
+	height: 100%;
+}
 body {
-    padding-top: 70px;
-    background: #f0f0f0;
+    /*padding-top: 70px;*/
+    /*background: #f0f0f0;*/
 }
 
 body.body-white {
@@ -631,6 +634,14 @@ ul.tc-photos {
     -o-transition: all 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
 }
-
-
+#nav_span{
+	float: right;
+}
+#nav_span a{
+	    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0px 10px;
+    line-height: 50px;
+}
 		

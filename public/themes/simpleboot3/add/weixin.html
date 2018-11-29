@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>公众号添加 {$site_info.site_name|default='友联客户信息管理系统'}</title>
+		<meta name="keywords" content="{$site_info.site_seo_keywords|default=''}" />
+		<meta name="description" content="{$site_info.site_seo_description|default=''}">
+		<include file="public@head" />
+		<link href="__TMPL__/public/assets/css/slippry/slippry.css" rel="stylesheet">
+		<hook name="before_head_end" />
+	</head>
+
+	<body style="height: 100%;">
+		<include file="public@nav" />
+		<h1 style="text-align: center;margin-top: 85px;">友联客户信息管理系统</h1>
+		<div class="container tc-main">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="col-lg-12" style="display: flex;justify-content: center;align-items: center;">
+						<form class="col-lg-12 form-group js-ajax-form" method="post" action="{:url('add/index/upweixin')}">
+							<div class="col-lg-12 form-group" style="text-align: center;">
+								<img src="__TMPL__/public/assets/images/wei.png" style="width: 100px;" title="添加微信"/>
+							</div>
+							<div class="form-group">
+								<label for="gongzhonghao" class="col-lg-3 control-label">公众号名称</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" id="gongzhonghao" placeholder="公众号名称" name="name">
+								</div>
+								<div style="clear: both"></div>
+							</div>
+							<div class="form-group">
+								<label for="zhanghao" class="col-lg-3 control-label">账号</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" id="zhanghao" placeholder="账号" name="username">
+								</div>
+								<div style="clear: both"></div>
+							</div>
+							<div class="form-group">
+								<label for="mima" class="col-lg-3 control-label">密码</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" id="mima" placeholder="密码" name="password">
+								</div>
+								<div style="clear: both"></div>
+							</div>
+							<div class="form-group">
+								<label for="yuanshiid" class="col-lg-3 control-label">原始ID</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" id="yuanshiid" placeholder="原始ID" name="gid">
+								</div>
+								<div style="clear: both"></div>
+							</div>
+							<div class="form-group">
+								<label for="APPID" class="col-lg-3 control-label">APPID</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" id="APPID" placeholder="APPID" name="appid">
+								</div>
+								<div style="clear: both"></div>
+							</div>
+							<div class="form-group">
+								<label for="AppSecret" class="col-lg-3 control-label">AppSecret</label>
+								<div class="col-lg-9">
+									<input type="text" class="form-control" id="AppSecret" placeholder="AppSecret" name="appsecret">
+								</div>
+								<div style="clear: both"></div>
+							</div>
+							<div class="form-group">
+								<label for="erweima" class="col-lg-3 control-label">二维码</label>
+								<div class="col-lg-9">
+									<input type="hidden" name="erweima" id="thumbnail" value="">
+	                                <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+	                                    <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+	                                         id="thumbnail-preview"
+	                                         width="135" style="cursor: pointer"/>
+	                                </a>
+                                	<input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+								</div>
+								<div style="clear: both"></div>
+							</div>
+							<div class="form-group">
+								<label for="daoqi" class="col-lg-3 control-label">到期时间</label>
+								<div class="col-lg-9">
+									<input class="form-control js-bootstrap-datetime" type="text" name="time"
+                                   value="{:date('Y-m-d H:i:s',time())}">
+								</div>
+								<div style="clear: both"></div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-3">
+								</div>
+								<div class="col-lg-9">
+									<button type="submit" class="btn btn-primary js-ajax-submit">提交</button>
+								</div>
+								<div style="clear: both"></div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /container -->
+		<include file="public@scripts" />
+		<script src="__TMPL__/public/assets/js/slippry.min.js"></script>
+		<hook name="before_body_end" />
+	</body>
+
+</html>
