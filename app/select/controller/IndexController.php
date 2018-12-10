@@ -30,15 +30,15 @@ class IndexController extends HomeBaseController
 			$name=$data['name'];
 			switch($data['text']){
 				case '微信公众号':
-					$ok = Db::name('weixin')->where('name','like',"%$name%")->select()->toArray();;
+					$ok = Db::name('weixin')->where('name','like',"%$name%")->order("id desc")->select()->toArray();;
 					$url=url('add/index/setweixin');
 					break;
 				case '微信小程序':
-					$ok = Db::name('xiaochengxu')->where('name','like',"%$name%")->select()->toArray();;
+					$ok = Db::name('xiaochengxu')->where('name','like',"%$name%")->order("id desc")->select()->toArray();;
 					$url=url('add/index/setxiaochengxu');
 					break;
 				case '网站':
-					$ok = Db::name('wangzhan')->where('name','like',"%$name%")->select()->toArray();;
+					$ok = Db::name('wangzhan')->where('name','like',"%$name%")->order("id desc")->select()->toArray();;
 					$url=url('add/index/setwangzhan');
 					break;
 			}
